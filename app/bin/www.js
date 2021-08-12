@@ -5,5 +5,5 @@ const PORT = 3000;
 
 
 app.listen(PORT, () => {
-    console.log("server is starting");
+  console.log("server is starting");
 });

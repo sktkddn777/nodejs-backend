@@ -1,45 +1,41 @@
 "use strict";
 
-const users = {
-    id: ["user1", "user2", "user3"],
-    pw: ["password1", "password2", "password3"],
-}
-
+const UserStorage = require("../../models/UserStorage");
 
 const output = {
-    hello: (req, res) => {
-        res.render("home/index");  
-    },
-    
-    login: (req, res) => {
-        res.render("home/login");  
-    },
+  hello: (req, res) => {
+    res.render("home/index");
+  },
+
+  login: (req, res) => {
+    res.render("home/login");
+  },
 }
 
 const process = {
-    login: (req, res) => {
-        const id = req.body.id,
-        pw = req.body.pw;
+  login: (req, res) => {
+    const id = req.body.id,
+      pw = req.body.pw;
+    const users = UserStorage.getUsers("id", "pw", "name");
+    console.log(users);
+    const response = {};
+    if (users.id.includes(id)) {
+      const idx = users.id.indexOf(id);
 
-        if(users.id.includes(id)) {
-            const idx = users.id.indexOf(id);
-        
-            if(users.pw[idx] === pw) {
-                return res.json({
-                    success: true,
-                });
-            }
-        }
-        return res.json({
-            success: false,
-            msg: "failed to login",
-        })
+      if (users.pw[idx] === pw) {
+        response.success = true;
+        return res.json(response);
+      }
     }
-}
+    response.success = false;
+    response.msg = "failed to login";
+    return res.json(response);
+  },
+};
 
 
 
 module.exports = {
-    output,
-    process
+  output,
+  process
 };
