@@ -16,6 +16,8 @@ function register() {
     checkPw: checkPw.value,
   };
 
+  console.log(req);
+
   fetch("/register", {
     method: "POST",
     headers: {
@@ -26,7 +28,7 @@ function register() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        location.href = "/";
+        location.href = "/login";
       } else {
         alert(res.msg);
       }
