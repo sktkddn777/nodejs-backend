@@ -19,6 +19,12 @@ class User {
     }
     return { success : false, msg : "id not exist" };
   }
+
+  register() {
+    const body = this.body;
+    const response = UserStorage.save(body);
+    return response;
+  }
 }
 
 

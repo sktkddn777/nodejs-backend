@@ -9,11 +9,14 @@ const id = document.querySelector("#id"),
 registerBtn.addEventListener("click", register);
 
 function register() {
+  if (!id.value) return alert("Enter ID");
+  if (pw != checkPw) {
+    return alert("PASSWORD NOT SAME")
+  }
   const req = {
     id: id.value,
     name: name.value,
     pw: pw.value,
-    checkPw: checkPw.value,
   };
 
   console.log(req);
