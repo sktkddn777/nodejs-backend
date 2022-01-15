@@ -1,0 +1,11 @@
+{
+  "name": "sangwoo-first",
+  "version": "0.0.1",
+  "description": "hi, this is my first npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sangwoo999",
+  "license": "MIT"
+}
