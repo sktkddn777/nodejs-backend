@@ -1,59 +1,48 @@
 const express = require('express');
-const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config();
+const indexRouter = require('./routes');
+const userRouter = require('./routes/user');
 
 const app = express();
-
-const indexPath = path.join(__dirname, '/index.html');
-
 app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 
 app.use(morgan('dev'));
-app.use(cookieParser());
-app.use(express.json())
+app.use('/', express.static(path.join(__dirname, 'public-999')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+  name: 'session-cookie',
+}));
 
+app.use('/', indexRouter);
+app.use('/user', userRouter);
 
 app.use((req, res, next) => {
-  console.log('모든 요청에 다 실행!!');
-  next();
+  res.status(404).send('Not Found');
 });
 
-app.get('/', (req, res, next) => {
-  // res.send("Welcome to fantastic node world");
-  req.cookies // { cookie : test }
-  res.cookie('name', 'sangwoo', {
-    expires: new Date() + 10000,
-    httpOnly: true,
-    path: '/',
-  })
-
-  // res.clearCookie('name', 'sangwoo', {
-  //   httpOnly: true,
-  //   path: '/',
-  // })
-
-  res.status(200).sendFile(indexPath);
-  if (true) {
-    next('route');
-  } else{
-    next();
-  }
-
-}, (req, res) => {
-  console.log("next");
-})
-
-app.get('/', (req, res) => {
-  res.status(200)
-  console.log("next route");
-})
-
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.error(err);
   res.status(500).send(err.message);
 });
 
 app.listen(app.get('port'), () => {
-  console.log('server is starting...')
-}) 
+  console.log(app.get('port'), '번 포트에서 대기 중');
+});
