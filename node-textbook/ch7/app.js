@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 
 const { sequelize } = require('./models');
+const indexRouter = require('./routes');
+const usersRouter = require('./routes/users');
+const commentsRouter = require('./routes/comments');
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
@@ -14,6 +17,7 @@ nunjucks.configure('views', {
 });
 
 // db 연결 sequelize를 통해
+// 만들어둔 모델들은 sync되는 순간 알아서 생성된다.
 sequelize.sync({ force: false })
 .then(() => {
   console.log("connection database successful");
@@ -28,6 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/comments', commentsRouter);
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} router dosen't exist`);
   error.status = 404;
