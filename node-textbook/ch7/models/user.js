@@ -3,12 +3,12 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // this.hasMany(models.Comment, {
-      //   foreignKey: "commenter",
-      //   // onUpdate: defaults to CASCADE
-      //   onDelete: "cascade",
-      //   sourceKey: 'id',
-      // });
+      this.hasMany(models.Comment, {
+        foreignKey: "commenter",
+        // onUpdate: defaults to CASCADE
+        onDelete: "cascade",
+        sourceKey: 'id',
+      });
     }
   }
   User.init(

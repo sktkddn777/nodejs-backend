@@ -38,7 +38,7 @@ db.sequelize = sequelize;
 db.User = require('./user')(sequelize, Sequelize);
 db.Comment = require('./comment')(sequelize, Sequelize);
 
-db.User.hasMany(db.Comment, { foreignKey: 'commenter', sourceKey: 'id'});   // 사용자는 여러개의 댓글을 가질 수 있음
-db.Comment.belongsTo(db.User, { foreignKey: 'commenter', targetKey: 'id' }); // 작성자가 한명임 
+db.User.associate(db);
+db.Comment.associate(db);
 
 module.exports = db;
