@@ -26,7 +26,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   secret: process.env.COOKIE_SECRET,
-  cookie: {
+  cookie: { //세션 쿠키 설정 (세션 관리 시 클라이언트에 보내는 쿠키)
     httpOnly: true,
     secure: false,
   },
