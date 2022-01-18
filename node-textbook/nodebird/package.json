@@ -1,0 +1,26 @@
+{
+  "name": "nodebird",
+  "version": "1.0.0",
+  "description": "로그인\r 이미지 업로드 \r 게시글 작성\r 해시태그 검색\r 팔로잉",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "author": "sangwoo999",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "nunjucks": "^3.2.3",
+    "sequelize": "^6.13.0",
+    "sequelize-cli": "^6.4.1"
+  }
+}
