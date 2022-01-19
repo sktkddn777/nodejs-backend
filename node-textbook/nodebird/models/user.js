@@ -12,6 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasMany(models.Post);
+      this.belongsToMany(models.User, {
+        foreignKey: 'followingId',
+        as: 'Followers',
+        through: 'Follow',
+      });
+      this.belongsToMany(models.User, {
+        foreignKey: 'followerId',
+        as: 'Followings',
+        through: 'Follow',
+      });
     }
   }
   User.init({

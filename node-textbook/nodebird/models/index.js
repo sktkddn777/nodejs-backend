@@ -1,11 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
+
 const db = {};
 
 let sequelize;
@@ -30,7 +28,19 @@ if (config.use_env_variable) {
 //     db[modelName].associate(db);
 //   }
 // });
+const User = require('./user')(sequelize, Sequelize);
+const Post = require('./post')(sequelize, Sequelize);
+const Hashtag = require('./hashtag')(sequelize, Sequelize);
+
 
 db.sequelize = sequelize;
+db.User = User;
+db.Post = Post;
+db.Hashtag = Hashtag;
+
+
+User.associate(db);
+Post.associate(db);
+Hashtag.associate(db);
 
 module.exports = db;
