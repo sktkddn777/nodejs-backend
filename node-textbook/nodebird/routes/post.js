@@ -60,5 +60,18 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
     console.error(error);
     next(error);
   }
-})
+});
+
+// post/3/delete
+router.post('/:id/delete', isLoggedIn, async(req, res, next) => {
+  try{
+    const deletePost = await Post.destroy({
+      where: {id: req.body.id}
+    });
+    res.redirect('/');
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
 module.exports = router;

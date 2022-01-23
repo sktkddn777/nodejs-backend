@@ -6,7 +6,11 @@
       <h2>팔로잉 목록</h2>
       {% if user.Followings %}
         {% for following in user.Followings %}
-          <div>{{following.nick}}</div>
+          <div>
+              이름: {{following.nick}} <br> 
+              이메일: {{following.email}} <br> 
+          </div>
+          <br>
         {% endfor %}
       {% endif %}
     </div>
@@ -14,7 +18,12 @@
       <h2>팔로워 목록</h2>
       {% if user.Followers %}
         {% for follower in user.Followers %}
-          <div>{{follower.nick}}</div>
+          <div>
+            이름: {{follower.nick}} <br>
+            이메일: {{follower.email}} <br>
+          </div>
+          
+          <br>
         {% endfor %}
       {% endif %}
     </div>

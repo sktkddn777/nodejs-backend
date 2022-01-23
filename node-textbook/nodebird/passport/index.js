@@ -13,11 +13,11 @@ module.exports = () => {
       where : { id },
       include: [{
         model: User,
-        attributes: ['id', 'nick'],
+        attributes: ['id', 'nick', 'email'],
         as: 'Followers',
       }, {
         model: User,
-        attributes: ['id', 'nick'],
+        attributes: ['id', 'nick', 'email'],
         as: 'Followings',
       }],
     })
