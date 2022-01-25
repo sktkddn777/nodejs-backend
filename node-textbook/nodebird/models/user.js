@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'Followings',
         through: 'Follow',
       });
+      this.hasMany(models.Domain);
     }
   }
   User.init({

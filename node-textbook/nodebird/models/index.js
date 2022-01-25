@@ -31,12 +31,13 @@ if (config.use_env_variable) {
 const User = require('./user')(sequelize, Sequelize);
 const Post = require('./post')(sequelize, Sequelize);
 const Hashtag = require('./hashtag')(sequelize, Sequelize);
-
+const Domain = require('./domain')(sequelize, Sequelize);
 
 db.sequelize = sequelize;
 db.User = User;
 db.Post = Post;
 db.Hashtag = Hashtag;
+db.Domain = Domain;
 
 
 User.associate(db);
