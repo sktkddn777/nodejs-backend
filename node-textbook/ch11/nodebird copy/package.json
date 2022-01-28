@@ -2,16 +2,18 @@
   "name": "nodebird",
   "version": "1.0.0",
   "description": "로그인\r 이미지 업로드 \r 게시글 작성\r 해시태그 검색\r 팔로잉",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon app",
-    "test": "jest"
+    "start": "nodemon server",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "sangwoo999",
   "license": "MIT",
   "devDependencies": {
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
